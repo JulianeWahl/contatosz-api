@@ -13,3 +13,9 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 ZAPI_INSTANCE_ID = os.getenv("ZAPI_INSTANCE_ID")
 ZAPI_TOKEN = os.getenv("ZAPI_TOKEN")
 ZAPI_CLIENT_TOKEN = os.getenv("ZAPI_CLIENT_TOKEN")
+
+def procurar_contatos():
+    supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+    response = supabase.table("contatos").select("*").limit(3).execute()
+    logging.info(f"total de contatos encontrados: {len(response.data)}")
+    return response.data
