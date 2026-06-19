@@ -35,3 +35,22 @@ def enviar_mensagem(telefone, nome):
         logging.info(f"mensagem enviada com sucesso para {nome}")
     else:
         logging.error(f"erro ao enviar mensagem para {nome}, status: {response.status_code}")
+
+def main():
+    logging.info("iniciando o envio de mensagens...")
+    contatos = procurar_contatos()
+
+    if not contatos:
+        logging.warning("nenhum contato encontrado.")
+        return
+
+    for contato in contatos:
+        nome = contato.get("nome")
+        telefone = contato.get("telefone")
+        enviar_mensagem(telefone, nome)
+
+    logging.info("envio finalizado!")
+
+
+if __name__ == "__main__":
+    main()        
